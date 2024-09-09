@@ -17,11 +17,11 @@ public class ExampleController {
 
     @GetMapping("persons")
     public Long get(final String name) {
-        return personRepository.countByNameLike(name);
+        return personRepository.countByNameStartingWith(name);
     }
 
     @GetMapping("sharded-persons")
     public Long get2(final String name) {
-        return shardedPersonRepository.countByNameLike(name);
+        return shardedPersonRepository.countByNameStartingWith(name);
     }
 }

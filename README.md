@@ -21,8 +21,13 @@ db.shardedPersons.countDocuments()
 db.persons.find({name: "Joana"}).count()
 db.shardedPersons.find({name: "Joana"}).count()
 
+// Contains
 db.persons.find({name: /Jo/}).count()
 db.shardedPersons.find({name: /Jo/}).count()
+
+// Starts With
+db.persons.find({name : /^Jo/}).count()
+db.shardedPersons.find({name : /^Jo/}).count()
 ```
 
 <br>
