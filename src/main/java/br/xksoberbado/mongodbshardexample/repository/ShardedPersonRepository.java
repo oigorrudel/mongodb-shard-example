@@ -7,5 +7,5 @@ import java.util.UUID;
 
 public interface ShardedPersonRepository extends MongoRepository<ShardedPerson, UUID> {
 
-    Long countByNameContaining(String name);
+    Long countByNameLike(String name);
 }

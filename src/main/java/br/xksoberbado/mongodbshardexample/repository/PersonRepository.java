@@ -7,5 +7,5 @@ import java.util.UUID;
 
 public interface PersonRepository extends MongoRepository<Person, UUID> {
 
-    Long countByNameContaining(String name);
+    Long countByNameLike(String name);
 }
