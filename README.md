@@ -1,39 +1,42 @@
 # mongodb-shard-example
 
-Subir containers
-```
-docker-compose up
-```
-<br>
+Exemplo de aplicação para demonstrar **sharding** (fragmentação) em MongoDB usando Java e Spring, explicando como distribuir dados entre múltiplos shards.
 
-### Comandos Mongo
+---
 
-Check da fragmentação
-```
-db.shardedPersons.getShardDistribution()
-```
+## Visão Geral
 
-Consultas de totais
-```
-db.persons.countDocuments()
-db.shardedPersons.countDocuments()
+Esse projeto ilustra como configurar e usar um cluster de MongoDB fragmentado (sharded cluster), de forma a:
 
-db.persons.find({name: "Joana"}).count()
-db.shardedPersons.find({name: "Joana"}).count()
+- Distribuir dados de uma coleção entre vários shards.
+- Escalar horizontalmente a base de dados.
+- Demonstrar a escolha e uso de uma **shard key** (chave de fragmentação) para particionar dados de maneira eficiente.
+- Realizar operações (CRUD) em coleções fragmentadas de forma transparente para a aplicação cliente.
 
-// Contains
-db.persons.find({name: /Jo/}).count()
-db.shardedPersons.find({name: /Jo/}).count()
+---
 
-// Starts With
-db.persons.find({name : /^Jo/}).count()
-db.shardedPersons.find({name : /^Jo/}).count()
-```
+## Tecnologias / Bibliotecas
 
-<br>
+- Java  
+- Spring
+- MongoDB
 
-### CURL's
-```
-curl --location 'localhost:8080/v1/persons?name=Jo'
-curl --location 'localhost:8080/v1/sharded-persons?name=Jo'
-```
+---
+
+## Arquitetura do Cluster Sharded
+
+Para usar sharding no MongoDB, seu cluster deve ter:
+
+1. **Shards**: servidores ou replicaset que armazenam os pedaços (chunks) dos dados.  
+2. **Config Servers**: armazenam os metadados do cluster sharded.  
+3. **mongos**: roteador que a aplicação usa para se conectar ao cluster sharded.  
+
+Esse tipo de arquitetura é descrito na documentação oficial do MongoDB.  
+
+---
+
+## Escolha da Chave de Shard (Shard Key)
+
+- A shard key determina como os documentos serão distribuídos entre os shards.
+- É importante escolher uma chave com **alta cardinalidade** para garantir uma distribuição uniforme entre shards.
+- Se usar **Spring Data MongoDB**, existe a anotação `@Sharded` para definir a shard key no seu modelo de entidade.
